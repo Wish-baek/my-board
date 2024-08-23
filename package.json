@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "homepage": "https://wish-baek.github.io/my-board/"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -18,6 +21,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.13",
+    "gh-pages": "^6.1.1",
     "lucide-react": "^0.429.0",
     "react": "^18.3.1",
     "react-day-picker": "8.10.1",
