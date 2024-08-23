@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export const Footer = () => {
   return (
-    <div className='fixed bottom-0 flex h-20 w-full items-center justify-between border-t border-gray-500 px-20'>
+    <div className='fixed bottom-0 flex h-20 w-full items-center justify-between border-t border-gray-500 bg-white px-20'>
       <Link to='/'>
         <HomeIcon />
       </Link>

@@ -13,13 +13,15 @@ import { FormItem } from './form-item'
 import { formSchema } from '@/types'
 import { v4 as uuidv4 } from 'uuid'
 import { useState } from 'react'
+import { Dialog, DialogClose, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 
 type Props = {
   defaultValues?: Form
   onRegister: (values: Form) => void
+  onDelete: () => void
 }
 
-export const Form = ({ defaultValues, onRegister }: Props) => {
+export const Form = ({ defaultValues, onRegister, onDelete }: Props) => {
   const navigate = useNavigate()
   const id = uuidv4()
   const [isViewMode, setIsViewMode] = useState(!!defaultValues)
@@ -70,29 +72,54 @@ export const Form = ({ defaultValues, onRegister }: Props) => {
           text='내용'
           component={
             isViewMode ? (
-              <div className='px-3 py-2 text-sm'>{content}</div>
+              <div className='text-wrap break-all px-3 py-2'>{content}</div>
             ) : (
               <Textarea {...register('content')} className='h-full' />
             )
           }
         />
       </div>
-      <div className='flex justify-end gap-2'>
-        <Button variant='secondary' onClick={() => navigate(-1)}>
-          뒤로가기
-        </Button>
-        <Button
-          onClick={
-            isViewMode
-              ? () => setIsViewMode(false)
-              : handleSubmit((values) => {
-                  onRegister(values)
-                  setIsViewMode(true)
-                })
-          }
-        >
-          {isViewMode ? '편집' : '작성'}
-        </Button>
+      <div className={cn('flex', isViewMode ? 'justify-between' : 'justify-end')}>
+        {isViewMode && (
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button className='self-start' variant='destructive'>
+                삭제
+              </Button>
+            </DialogTrigger>
+            <DialogContent className='w-80 rounded-lg'>
+              <DialogTitle>삭제</DialogTitle>
+              <div>삭제할까요?</div>
+              <div className='flex gap-2'>
+                <Button variant='secondary' className='w-full'>
+                  취소
+                </Button>
+                <DialogClose>
+                  <Button className='w-full' onClick={onDelete}>
+                    삭제할래요
+                  </Button>
+                </DialogClose>
+              </div>
+            </DialogContent>
+          </Dialog>
+        )}
+        <div className='flex gap-2'>
+          <Button variant='secondary' onClick={() => navigate(-1)}>
+            뒤로가기
+          </Button>
+          <Button
+            onClick={
+              isViewMode
+                ? () => setIsViewMode(false)
+                : handleSubmit((values) => {
+                    onRegister(values)
+                    setIsViewMode(true)
+                  })
+            }
+          >
+            {isViewMode ? '편집' : '작성'}
+          </Button>
+        </div>
       </div>
     </div>
   )
