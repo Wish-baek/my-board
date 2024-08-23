@@ -1,4 +1,5 @@
 {
+  "homepage": "https://wish-baek.github.io/my-board/",
   "name": "my-board",
   "private": true,
   "version": "0.0.0",
@@ -9,8 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "homepage": "https://wish-baek.github.io/my-board/"
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
